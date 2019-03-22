@@ -1,0 +1,37 @@
+var n,t:longint;
+    a:array[0..15]of longint;
+    b,c:array[-15..15]of boolean;
+    d:array[0..50]of boolean;
+procedure Neptune(k:longint);
+var
+  i,j:longint;
+begin
+  if k>n then
+  begin
+    inc(t);
+if t<=3 then
+    begin
+      for i:=1 to n-1 do
+        write(a[i],' ');
+      writeln(a[n]);
+    end;
+  end
+  else
+    for i:=1 to n do
+      if (not b[i]) and (not c[i-k]) and (not d[i+k]) then
+      begin
+        a[k]:=i;
+        b[i]:=true;
+        c[i-k]:=true;
+        d[i+k]:=true;
+        Neptune(k+1);
+        b[i]:=false;
+        c[i-k]:=false;
+        d[i+k]:=false;
+      end;
+end;
+begin
+  readln(n);
+  Neptune(1);
+  writeln(t);
+end.
