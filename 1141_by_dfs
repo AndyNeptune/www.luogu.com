@@ -1,0 +1,51 @@
+var i,j,n,m,o,x,y,l:longint;
+    ch:char;
+    a:array[0..1005,0..1005] of char;
+    dx:array[1..4] of longint=(-1,0,1,0);
+    dy:array[1..4] of longint=(0,1,0,-1);
+    Andy:array[1..1000,1..1000] of longint;
+    Neptune:array[0..1005,0..1005] of boolean;
+    ans:array[1..100000] of longint;
+procedure dfs(x,y:longint);
+var i,xx,yy:longint;
+begin
+  for i:=1 to 4 do
+  begin
+    xx:=x+dx[i];
+    yy:=y+dy[i];
+    if (xx>0) and (xx<=n) and (yy>0) and (yy<=n) then
+    if (a[xx,yy]<>a[x,y]) and not Neptune[xx,yy] then
+    begin
+      Andy[xx,yy]:=l;
+      Neptune[xx,yy]:=true;
+      inc(o);
+      dfs(xx,yy);
+    end;
+  end;
+end;
+begin
+  readln(n,m);
+  for i:=1 to n do
+  begin
+    for j:=1 to n do
+    begin
+      read(ch);
+      a[i,j]:=ch;
+    end;
+    readln;
+  end;
+  for i:=1 to m do
+  begin
+    read(x,y);
+    o:=1;
+    if Andy[x,y]=0 then
+    begin
+     inc(l);
+      Andy[x,y]:=l;
+      Neptune[x,y]:=true;
+      dfs(x,y);
+      ans[l]:=o;
+    end;
+    writeln(ans[Andy[x,y]]);
+  end;
+end.
