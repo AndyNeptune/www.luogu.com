@@ -1,0 +1,46 @@
+var i,j,m,n,ans,w,t,xx,yy,k:longint;
+    a:array[0..105,0..105] of char;
+    dx:array[1..8] of longint=(-1,-1,0,1,1,1,0,-1);
+    dy:array[1..8] of longint=(0,1,1,1,0,-1,-1,-1);
+    h:array[1..100000,1..2] of longint;
+begin
+  readln(m,n);
+  for i:=1 to m do
+    begin
+      for j:=1 to n do
+        begin
+          read(a[i,j]);
+        end;
+      readln;
+    end;
+  for i:=1 to m do
+  for j:=1 to n do
+    if a[i,j]<>'.' then
+      begin
+        inc(ans);
+        a[i,j]:='.';
+        h[1,1]:=i;
+        h[1,2]:=j;
+        w:=1;t:=1;
+        while t<=w do
+          begin
+           for k:=1 to 8 do
+             begin
+               xx:=h[t,1]+dx[k];
+               yy:=h[t,2]+dy[k];
+                 begin
+                   if (xx>0) and (xx<=m) and (yy>0) and (yy<=n)
+                     and (a[xx,yy]<>'.') then
+                       begin
+                         inc(w);
+                         a[xx,yy]:='.';
+                         h[w,1]:=xx;
+                         h[w,2]:=yy;
+                      end;
+                  end;
+              end;
+           inc(t);
+         end;
+       end;
+  write(ans);
+end.
