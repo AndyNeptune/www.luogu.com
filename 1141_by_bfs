@@ -1,4 +1,3 @@
-// luogu-judger-enable-o2
 var n,m,i,j,c,t,w,xx,yy,x,y:longint;
     a:array[0..1005,0..1005] of char;
     dx:array[1..4] of longint=(-1,0,1,0);
