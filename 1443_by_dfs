@@ -1,0 +1,40 @@
+var c:array[1..8]of longint=(1,-1,2,-2,1,-1,2,-2);
+    d:array[1..8]of longint=(2,2,1,1,-2,-2,-1,-1);
+    a:array[0..500,0..500]of longint;
+    w,n,m,g,x,y,k,i,j:longint;q:string;
+procedure try(h,l:longint);
+var i:longint;
+  begin
+   if a[h,l]>700 then exit;
+
+   for i:=1 to 8 do
+   if (h+c[i]<=n)and(h+c[i]>0)and(l+d[i]<=m)and(l+d[i]>0) then
+   if (a[h+c[i],l+d[i]]=-1) or (a[h,l]+1<a[h+c[i],l+d[i]])
+    then begin
+          inc(g);
+          a[h+c[i],l+d[i]]:=g;
+          try(h+c[i],l+d[i]);
+          dec(g);
+         end;
+  end;
+begin
+ read(n,m,x,y);
+ for i:=1 to n do
+  for j:=1 to m do
+   a[i,j]:=-1;
+ a[x,y]:=0;
+ try(x,y);
+ for i:=1 to n do
+ begin
+  for j:=1 to m do
+   begin
+    k:=5;
+    if a[i,j]<0 then dec(k);
+    str(abs(a[i,j]),q);
+    k:=k-length(q);
+    write(a[i,j]);
+    for w:=1 to k do write(' ');
+   end;
+   writeln;
+ end;
+end.
